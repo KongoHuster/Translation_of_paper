@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.25)  28 DEC 2019 19:07
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.25)  28 DEC 2019 13:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/yzh/Desktop/毕业论文翻译/translation/main
-(/Users/yzh/Desktop/毕业论文翻译/translation/main.tex
+**/Users/yzh/Desktop/Translation_of_paper/translation/main
+(/Users/yzh/Desktop/Translation_of_paper/translation/main.tex
 LaTeX2e <2018-12-01>
 (./husttrans.cls
 Document Class: husttrans 2017/02/21 v1.3 A Translation Template for Huazhong University of Science and Technology
@@ -1577,6 +1577,10 @@ Package fontspec Info: Font family 'AdobeHeitiStd(0)' created for font 'Adobe
 (fontspec)             Std/OT:script=hani;language=DFLT;mapping=tex-text;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
+
+LaTeX Font Warning: Font shape `TU/AdobeHeitiStd(0)/bx/n' undefined
+(Font)              using `TU/AdobeHeitiStd(0)/m/n' instead on input line 20.
+
 LaTeX Font Info:    Try loading font information for U+msa on input line 20.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -1603,12 +1607,7 @@ Overfull \hbox (25.4643pt too wide) in paragraph at lines 20--20
 
 
 
-] (./text.tex
-
-LaTeX Font Warning: Font shape `TU/AdobeHeitiStd(0)/bx/n' undefined
-(Font)              using `TU/AdobeHeitiStd(0)/m/n' instead on input line 4.
-
-[1
+] (./text.tex [1
 
 ] [2]
 File: figure/Networ_Architecture_of_LWA.png Graphic file (type bmp)
@@ -1686,12 +1685,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 29.
  ) 
 Here is how much of TeX's memory you used:
- 44395 strings out of 492916
- 858450 string characters out of 6133344
- 10920230 words of memory out of 15855799
- 47844 multiletter control sequences out of 15000+600000
- 542640 words of font info for 126 fonts, out of 8000000 for 9000
+ 44398 strings out of 492916
+ 858622 string characters out of 6133344
+ 10919981 words of memory out of 15855550
+ 47846 multiletter control sequences out of 15000+600000
+ 542648 words of font info for 127 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 60i,11n,94p,2321b,450s stack positions out of 30000i,500n,10000p,200000b,80000s
+ 60i,11n,94p,2335b,450s stack positions out of 30000i,500n,10000p,200000b,80000s
 
 Output written on main.pdf (20 pages).
