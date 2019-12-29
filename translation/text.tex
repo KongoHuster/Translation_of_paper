@@ -164,6 +164,47 @@ LWA原为在eNB处进行控制，并在PDCP层执行帧拆分。变量启用了n
   \caption{图5：LWIP实施的流程图}
 \end{figure}
 
+\begin{table}
+  \centering
+  \caption*{表 1:ns-3 LWA实现和3GPP功能清单}
+  \begin{tabular}{|c|c|c|}   %三个c是因为三列，令每列显示在中间显示，也可以是l或r
+   \hline         %画一条横线
+    属性 & ns-3规则 & 3GPP标准 \\
+    \hline 
+    eNB控制  & 是  & 是 \\
+    \hline 
+    连接层  & PDCP  & PDCP \\
+    \hline 
+    卸载粒度  & 拆分或交换承载  & 拆分或交换承载 \\
+    \hline 
+    LTE网络升级  & eNB和UE  & 基站 \\
+    \hline 
+    UE PDCP上的聚合流  &  无 & 是 \\
+    \hline 
+    LTE中的新网络实体 & LWAAP和Xw-U & LWAAP和Xw \\
+    \hline 
+    “流量控制”的附加接口  & Xw-U & Xw-U \\
+    \hline 
+    Xw控制平面接口  & 无 & Xw-C \\
+    \hline 
+    WT连接建立 & 无 & 是 \\
+    \hline 
+    Wi-Fi中的新网络节点  & WT & WT \\
+    \hline 
+    WT连接建立  & 无 & 是 \\
+    \hline 
+    Wi-Fi中的新网络节点  & WT & WT \\
+    \hline 
+    WLAN测量 & 无 & 是 \\
+    \hline 
+    WLAN安全 & 无 & WLAN原生802.1x EAP / AKA \\
+    \hline 
+    WLAN流量方向 & 下行链接 & 下行链接 \\
+    \hline 
+\end{tabular}
+\end{table}
+
+
 %\setcounter{chapter}{4}
 \newpage
 \subsection*{4 ns-3中lwip的实现}
@@ -239,7 +280,57 @@ Wi-Fi站的数据包接收。在Wi-Fi站点的目的地接收到的数据包包�
 \subsection*{5 绩效评估}
 在本节中，我们描述评估方案的定义和结果的收集。我们评估了通过使用LWA和LWIP所获得的总容量，以及它们如何在效率和与附近具有Wi-Fi干扰网络相关的不同影响方面进行比较。表3列出了所使用的参数，对于LWA和LWIP Wi-Fi传输，我们考虑了没有MIMO和聚合。模拟运行100秒，已重复10次。我们使用恒定比特率（CBR）UDP源.
 
+
+\begin{table}
+  \centering
+  \caption*{表 2:ns-3 LWIP实现3GPP功能清单}
+  \begin{tabular}{|c|c|c|}   %三个c是因为三列，令每列显示在中间显示，也可以是l或r
+   \hline         %画一条横线
+    属性 & ns-3 LWIP & 3GPP标准LWIP \\
+    \hline 
+    eNB控制  & 是  & 是 \\
+    \hline 
+    连接层  & PDCP  & IP (PDCP SDU)P \\
+    \hline 
+    卸载粒度  & 交换承载  & 交换承载 \\
+    \hline 
+    LTE网络升级  & 基站  & 基站 \\
+    \hline 
+    UE PDCP上的聚合流  &  无 & 是 \\
+    \hline 
+    LTE中的新网络实体 & LWIPEP和SeGW & LWIPEP和SeGW \\
+    \hline 
+    Wi-Fi中的新网络节点  & 无 & 无 \\
+    \hline 
+    WLAN测量  & 无 & 是 \\
+    \hline 
+    WLAN安全 & 无 & WLAN原生802.1x EAP / AKA \\
+    \hline 
+    WLAN流量方向 & 下行链接 & W下行加上上行 \\
+    \hline 
+\end{tabular}
+\end{table}
+
 我们首先比较未许可频谱中LWA和LWIP的效率。为此，我们模拟了1个eNB，1个Wi-Fi AP，1个Wi-Fi STA和1个UE，同时eNB生成了朝向UE的下行链路流量。为了评估网络效率，我们LTE和Wi-Fi通道都饱和。也就是说，我们使确保始终有一个要由eNB和Wi-Fi AP传输的数据包。这样，我们可以比较LWA和LWIP的最大容量。在没有其他网络干扰的情况下，由于IPSec隧道的额外报头会减少LWIP可以在每个站点传输的有效信息，因此我们希望LWIP能够以比LWA更低的程度增强LTE容量。Wi-Fi传输尝试。结果绘制在图7中，其中显示了未激活LWA和LWIP时的LTE吞吐量，以及通过使用LTE以及具有可变数据包大小的LWA和LWIP获得的聚合容量。请注意，由于此处假设处于饱和条件，因此使用部分或全部LWA不会对吞吐量结果产生任何影响。因此，我们有选择仅显示完整的LWA结果。
+
+\begin{table}
+  \centering
+  \caption*{表 3:仿真参数}
+  \begin{tabular}{|c|c|c|c|}   %三个c是因为三列，令每列显示在中间显示，也可以是l或r
+   \hline         %画一条横线
+    Wi-Fi参数 & 值 & 升参数 & 28\\
+    \hline 
+    发射功率 & 30 dBm & 发射功率 & 30 dBm\\
+    \hline 
+    带宽 & 20兆赫 & 升参数 & 28\\
+    \hline 
+    Wi-Fi参数 & 值 & 传输带宽配置[NRB] & 25(5 MHz)\\
+    \hline 
+    RTS/CTS & 否 & 噪声系数 & 5\\
+    \hline 
+\end{tabular}
+\end{table}
+
 
 从图7中可以看出，对于所考虑的参数，LWA和LWIP的使用可以显着提高总容量。请注意，我们使用了IEEE 802.11ac参数，并且获得的Wi-Fi吞吐量可以高达78 Mbps。正如我们之前介绍的，我们可以观察到，使用LWIP会导致吞吐量略低于LWA。这是由于IPSec隧道的额外标头所致。我们可以在以及增加数据包大小的效果（每个数据包传输的有效数据）。在Wi-Fi结果中增加数据包大小和每次通道尝试传输更多数据时，吞吐量会更高，通过补偿开销（无论是标头还是通道访问效率）（例如由于DIFS，SIFS和backo ）插槽而导致的空通道持续时间）。从图中可以看出，这种趋势的综合效果（随着数据包大小的增加，吞吐量增加）和更高的LWIP与LWA相比，效率低下。请注意，对于较小的数据包大小，由于开销引起的LWIP较高的效率更加明显。对于更长的数据包大小，随着通道访问变得更加有效，在LWIP中引入的额外增加的开销可以忽略不计。
 
