@@ -121,7 +121,7 @@ RBID和LWA激活状态标签。当使用激活部分或全部LWA时，所有数�
 \subsubsection*{3.2.4}
 LTE PDCP层中的流控制。到达PDCP层的数据包带有变量，该变量被分配了一个值，该值对应于完整的LWA激活，将被标记并排队以通过Wi-Fi基础设施进行传输。
 另一方面，如果为变量分配了与部分LWA激活相对应的值，则模运算符用于确定要发送到Wi-Fi AP和eNB的数据包的百分比。
-在图中，这由“剩余=PDCPcounter％“ N”“表示4.变量N可以决定拆分百分比，并将其设置为固定值2。因此，当部分LWA被激活时，流量在LTE和Wi-Fi网络之间平均分配。
+在图中，这由“剩余=PDCPcounter％N“表示4.变量N可以决定拆分百分比，并将其设置为固定值2。因此，当部分LWA被激活时，流量在LTE和Wi-Fi网络之间平均分配。
 为了允许在LWA UE上层按顺序传送帧，已经为到达eNB的PDCP层的每个数据包分配了序列号。此数字嵌入在称为SeqTsHeader的12个字节的标头中。序列号和RBID信息可用于在UE处聚合数据。
 
 为了在PDCP层访问数据包，我们利用了依赖于回调和属性系统的ns-3跟踪系统。在PDCP层中添加了一个称为TxPDUtrace的新跟踪源，
@@ -132,20 +132,20 @@ PDCP层上的跟踪回调xPDU函数。
 在这里重要的是提到上述回调函数仅用于标记LWA的帧，并且这些帧不会传递到LTE的eNB的RLC层。
 
 \subsubsection*{3.2.5}
-到LWAAP的数据包生成。在3GPP LTE中，典型的传输时间间隔（TTI）设置为1 ms \cite{LTE}，该时间间隔是指通过无线电链路进行传输的持续时间。为了及时准确从LTE eNB到Wi-Fi AP的帧传输，每隔“ X”个间隔后便会持续观察到缓冲区。该间隔的值保持在上述TTI以下（即，X = 0.1ms）。因此，无论何时将数据包放入缓冲区中，都会立即将其传输到LWAAPnode上的UDP套接字的源。这些过程由图4中的“入队数据包”，“队列为空”和“等待X时间”实体表示。
+到LWAAP的数据包生成。在3GPP LTE中，典型的传输时间间隔（TTI）设置为1 ms \cite{LTE}，该时间间隔是指通过无线电链路进行传输的持续时间。为了及时准确进行从LTE eNB到Wi-Fi AP的帧传输，每隔“ X”个间隔后便会持续观察到缓冲区。该间隔的值保持在上述TTI以下（即，X = 0.1ms）。因此，无论何时将数据包放入缓冲区中，都会立即将其传输到LWAAPnode上的UDP套接字的源。这些过程由图4中的“入队数据包”，“队列为空”和“等待X时间”实体表示。
 
 \subsubsection*{3.2.6}
-3.2.6通过LWAAP制定数据包并传输到Xw链路。如上所述，分组的RBID和序列号是重要的参数，其能够在UE处聚合“ ow”。当将数据包与SeqTsHeader一起复制时，会传递有关序列号的信息。RBID首先从标签中提取lwaactivate信息，然后将其添加为标头以通过Xw接口传输。
+通过LWAAP制定数据包并传输到Xw链路。如上所述，分组的RBID和序列号是重要的参数，其能够在UE处聚合“ ow”。当将数据包与SeqTsHeader一起复制时，会传递有关序列号的信息。RBID首先从标签中提取lwaactivate信息，然后将其添加为标头以通过Xw接口传输。
 
 如LTE版本13标准中所述，LWAAP实体生成包含RBID身份的LWAAP PDU。为了转发RBID和LWA状态信息，定义了一个名为LwaHeader的新的2字节标头。在下一阶段，数据包被发送到在LWAAPnode上安装的UDP套接字的源。以上图4的LWAAP实体中显示了突出显示的步骤。
 
 \subsubsection*{3.2.7}
-3.2.7数据通过Wi-Fi AP从LWAAPnode转发到Wi-Fi站。从LWAAPnode到Wi-Fi站的数据包的下行链路是通过创建源目标套接字来实现的。假定模拟中的Xw接口是在LWAAPnode和WTnode之间创建的P2P链接。Wi-fi AP也通过P2P链路连接到WT。
+数据通过Wi-Fi AP从LWAAPnode转发到Wi-Fi站。从LWAAPnode到Wi-Fi站的数据包的下行链路是通过创建源目标套接字来实现的。假定模拟中的Xw接口是在LWAAPnode和WTnode之间创建的P2P链接。Wi-fi AP也通过P2P链路连接到WT。
 
 LWAAPnode设置为源套接字，Wi-Fi站设置为目标接收器。两个套接字均使用IPv4地址标识。对于套接字之间的同步，两个端口的端口号保持相等。要创建路由数据库并初始化在P2P节点，Wi-Fi AP和Wi-Fi站点之间进行连接的路由表中，使用了Ipv4GlobalRoutingHelper类。
 
 \subsubsection*{3.2.8}
-3.2.8Wi-Fi站的数据包接收。在Wi-Fi站的目标套接字处接收到的数据包包括SeqTsHeader和LwaHeader标头。该信息可以用于在UE的应用层处聚合分组。
+Wi-Fi站的数据包接收。在Wi-Fi站的目标套接字处接收到的数据包包括SeqTsHeader和LwaHeader标头。该信息可以用于在UE的应用层处聚合分组。
 
 借助于表1，我们提供了在ns-3中使用3GPP的LWA标准的LWA实现功能之间的比较。如表中突出显示的那样，3GPP的版本13提供的大多数LWA规范都是在ns-3中实现的。
 LWA原为在eNB处进行控制，并在PDCP层执行帧拆分。变量启用了ns-3实现，以支持拆分和交换承载功能。
@@ -154,14 +154,14 @@ LWA原为在eNB处进行控制，并在PDCP层执行帧拆分。变量启用了n
 \begin{figure}[htb]
   \centering
   \includegraphics[width=.8\textwidth]{LWA_ns-3_Implementation.png}
-  \caption*{图4：LWA实施的活动图}
+  \caption*{图4：LWA实施的流程图}
 \end{figure}
 
 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=.8\textwidth]{LWIP_ns-3_Implementation.png}
-  \caption{图5：LWIP实施的活动图}
+  \caption{图5：LWIP实施的流程图}
 \end{figure}
 
 %\setcounter{chapter}{4}

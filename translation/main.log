@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.25)  28 DEC 2019 13:03
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019) (preloaded format=xelatex 2019.12.25)  28 DEC 2019 19:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1633,7 +1633,7 @@ File: figure/LTE_Aggregated_Capacity_using_LWA_and_LWIP.png Graphic file (type b
 File: figure/Throughput_Achieved_in_the_LTE_and_LWA_Link_when_a_Wi-Fi_Interferer_Network_is_Placed_in_the_Vicinity.png Graphic file (type bmp)
 <figure/Throughput_Achieved_in_the_LTE_and_LWA_Link_when_a_Wi-Fi_Interferer_Network_is_Placed_in_the_Vicinity.png>
 
-Underfull \vbox (badness 3354) has occurred while \output is active []
+Underfull \vbox (badness 5175) has occurred while \output is active []
 
  [15]
 File: figure/Throughput_Achieved_in_the_LTE_and_LWA_Link_when_a_Wi-Fi_Interferer_Network_is_Placed_in_the_Vicinity2.png Graphic file (type bmp)
@@ -1685,12 +1685,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 29.
  ) 
 Here is how much of TeX's memory you used:
- 44398 strings out of 492916
- 858622 string characters out of 6133344
+ 44372 strings out of 492916
+ 856842 string characters out of 6133344
  10919981 words of memory out of 15855550
- 47846 multiletter control sequences out of 15000+600000
+ 47820 multiletter control sequences out of 15000+600000
  542648 words of font info for 127 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 60i,11n,94p,2335b,450s stack positions out of 30000i,500n,10000p,200000b,80000s
+ 60i,11n,94p,2337b,450s stack positions out of 30000i,500n,10000p,200000b,80000s
 
 Output written on main.pdf (20 pages).
