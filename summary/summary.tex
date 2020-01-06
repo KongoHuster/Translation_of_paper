@@ -1,0 +1,163 @@
+\documentclass[a4paper,12pt]{article} % article, report, book
+\usepackage{ifthen}
+
+\usepackage{fontspec}
+
+\setmainfont[Ligatures={Common,TeX}]{Tex Gyre Termes}
+\setsansfont[Ligatures={Common,TeX}]{Droid Sans}
+\setmonofont{CMU Typewriter Text}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+
+\usepackage{luatexja-fontspec}
+\setmainjfont[BoldFont={AdobeHeitiStd-Regular},ItalicFont={AdobeKaitiStd-Regular}]{AdobeSongStd-Light}
+\setsansjfont{AdobeKaitiStd-Regular}
+\defaultjfontfeatures{JFM=kaiming}
+\newjfontfamily\HEI{AdobeHeitiStd-Regular}
+\newjfontfamily\KAI{AdobeKaitiStd-Regular}
+\newjfontfamily\FANGSONG{AdobeFangsongStd-Regular}
+
+\usepackage{zhnumber}
+
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  top=1.2in,
+  bottom=1.2in,
+  left=1in,
+  right=1in,
+  includefoot
+}
+\ifthenelse{\isundefined{\pagewidth}}{
+  \pdfpagewidth=\paperwidth
+  \pdfpageheight=\paperheight
+}{
+  \pagewidth=\paperwidth
+  \pageheight=\paperheight
+}
+
+\usepackage{color}
+\usepackage[unicode]{hyperref}
+\definecolor{hyperreflinkred}{RGB}{128,23,31}
+\hypersetup{
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  bookmarksopenlevel=1,
+  breaklinks=true,
+  colorlinks=true,
+  allcolors=hyperreflinkred,
+  linktoc=page,
+  plainpages=false,
+  pdfpagelabels=true,
+  pdfstartview={XYZ null null 1}
+}
+\makeatletter
+\def\title#1{\gdef\@title{#1}\hypersetup{pdftitle={#1}}}
+\def\author#1{\gdef\@author{#1}\hypersetup{pdfauthor={#1}}}
+\makeatother
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt plus 2pt minus 1pt}
+\linespread{1.2}\selectfont
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx,caption,subcaption}
+\usepackage{titlesec}
+\usepackage[inline]{enumitem}
+\setlist{noitemsep,partopsep=0pt,topsep=.8ex}
+\setlist[1]{labelindent=\parindent}
+\setlist[enumerate,1]{label=\arabic*.,ref=\arabic*}
+\setlist[enumerate,2]{label*=\arabic*,ref=\theenumi.\arabic*}
+\setlist[enumerate,3]{label=\emph{\alph*}),ref=\theenumii\emph{\alph*}}
+\setlist[description]{font=\bfseries}
+
+\def\indexname{索引}
+\def\figurename{图}
+\def\tablename{表}
+\ifthenelse{\isundefined{\bibname}}
+{
+    \def\refname{参考文献}
+}
+{
+    \def\bibname{参考文献}
+}
+\def\contentsname{目录}
+\def\appendixname{附录}
+\def\listfigurename{插图索引}
+\def\listtablename{表格索引}
+\def\equationautorefname{公式}
+\def\footnoteautorefname{脚注}
+\def\itemautorefname~#1\null{第~#1~项\null}
+\def\figureautorefname{图}
+\def\tableautorefname{表}
+\def\appendixautorefname{附录}
+\expandafter\def\csname\appendixname autorefname\endcsname{\appendixname}
+\ifthenelse{\not\isundefined{\chapter}}
+{
+    \def\chapterautorefname~#1\null{第\zhnumber{#1}章\null}
+}{}
+\def\sectionautorefname~#1\null{#1~小节\null}
+\def\subsectionautorefname~#1\null{#1~小节\null}
+\def\subsubsectionautorefname~#1\null{#1~小节\null}
+\def\pageautorefname~#1\null{第~#1~页\null}
+\def\proofautorefname{证明}
+\ifthenelse{\not\isundefined{\chapter}}{
+    \titleformat{\chapter}{\LARGE\bfseries\centering}{第\,\zhnumber{\thechapter}\,章}{1em}{}
+}
+
+\begin{document}
+
+\title{论文总结}
+
+%--------------------------------------------------------------------------------------------
+
+\author{易子闳}
+
+\maketitle
+
+%\begin{abstract}
+%
+%摘要内容如下
+%
+%\end{abstract}
+
+问题1）: 为什么作者想研究ns-3 NEXT？（研究动机）
+
+回答：1.由于智能手机，平板电脑，可穿戴设备和其他智能移动设备的数量急剧增加，导致对当前和未来无线网络的流量需求有了巨大的增长；
+
+2.本文旨在以实现所需的未来容量增长标准化为动机，在3GPP上使蜂窝移动网络能够在未经许可的2.4和5GHz频谱上运行；
+
+3.ns-3通过将运行实际应用程序和网络协议代码的能力与“灵活性”以及在受控网络环境中进行仿真的能力相结合，从而避免重复的工作
+
+4.本文介绍了LWA和LWIP协议的设计细节，并介绍ns-3中的第一 个ns-3LWA和LWIP实现。特别是，这项工作着重于不同 ns-3模块和不同技术协议的适配和并发使用，以支持这些互通方案。
+
+
+
+问题2）: 其他人已经做了什么工作？（研究进展）
+
+回答：迄今为止，有五种不同的方法可将数据从 LTE 转移到非许可频段:1)LWA， 2)LWIP，3)LAA，4)LTEU，5)MuLTEFire。这些替代方法中的每一种旨在尽可能地满足蜂窝通信的未来增长。然而，在文献中没有根据其实施和性能的可行性对这些进行比较和分析。在这项工作中，论文作者在 ns-3中介绍了LWA和LWIP协议的实现细节，以满足上述要求。
+
+
+
+问题3）：作者的想法是什么？（亮剑贡献）
+
+回答： 介绍了LWA和LWIP协议的实现细节。
+
+
+
+问题4）：作者的想法与其他人的工作有什么不同？存在什么技术难度？（创新性论述）
+
+回答：替代方法中的每一种旨在尽可能地满足蜂窝通信的未来增长。然而，在文献中没有根据其实施和性能的可行性对这些进行比较和分析。
+
+
+问题5）：作者设计了什么实验验证想法？评价指标怎样定义？（研究设计）
+
+回答：评估了通过使用 LWA 和 LWIP 所获得的总容量，以及它们如何在效率和与附近具有 Wi-Fi 干扰网络相关的不同 影响方面进行比较。比较了未许可频谱中 LWA 和 LWIP 的效率；评估具有 Wi-Fi 网络干扰 LWA 和 LWIP 链路的影响，并分析 Wi-Fi 网络 中上行链路传输数量增加的影响；评估了具有 Wi-Fi 网络干扰源的影响，并通过增加两个网络(Wi-Fi 和 LWA 链路)之间的距离以及通过增加两个网络之间的距离来分析干扰的影响如何变化。
+
+问题6）：作者有什么主要实验结果？实验结果有什么重要性？（研究亮点）
+
+回答：提供了这两种技术的详细信息，并提供了实现的不同方面 的分步说明，并通过仿真结果对其进行了验证。分析了饱和条件下 LWA 和 LWIP 实施的效率。在没有干扰的情况下，LTE-WLAN互通方案的总容量将大大增加。
+
+\bibliography{reference}
+
+\end{document}
